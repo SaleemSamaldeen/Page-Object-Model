@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Sample Test Execution" parallel="classes" thread-count="2">
+    <test name="Smoke Test">
+        <classes>
+            <class name="SampleTest.TestScenario1"/>
+            <class name="SampleTest.TestScenario2"/>
+        </classes>
+    </test>
+</suite>

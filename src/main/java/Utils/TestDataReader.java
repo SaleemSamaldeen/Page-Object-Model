@@ -55,16 +55,5 @@ public class TestDataReader extends ConfigReader {
         //intTestData(test_groups.get(0));
         String testSheet = ((Test) m.getAnnotation(Test.class)).testName();
         return DataInputProvider.getSheet(testSheet);
-        /**    getTestData(testSheet);
-         int rowCount = getRowCount();
-         int colCount = getColumnCount();
-         Object data[][] = new Object[rowCount - 1][colCount];
-         for (int i = 1; i < rowCount; i++) {
-         for (int j = 0; j < colCount; j++) {
-         String cellData = getCellData(i, j);
-         data[i - 1][j] = cellData;
-         }
-         }
-         return data;**/
     }
 }

@@ -2,8 +2,8 @@
 <suite name="Sample Test Execution" parallel="classes" thread-count="2">
     <test name="Smoke Test">
         <classes>
-            <class name="SampleTest.TestScenario1"/>
-            <class name="SampleTest.TestScenario2"/>
+            <class name="SampleTest.TestScenarioWithReport"/>
+            <class name="SampleTest.TestScenarioWithReport2"/>
         </classes>
     </test>
 </suite>

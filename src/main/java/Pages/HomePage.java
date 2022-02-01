@@ -1,6 +1,7 @@
 package Pages;
 
 import Utils.TestSetup;
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,14 +14,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends TestSetup {
 
-    //public WebDriver driver;
+    public WebDriverWait wait;
 
-    public HomePage(WebDriver driver) {
+    public HomePage(WebDriver driver, ExtentTest test) {
         this.driver = driver;
+        this.test = test;
         PageFactory.initElements(driver, this);
     }
 
-    int timeout = 120;
+    int timeout = 50;
 
     @FindBy(xpath = "//input[@name='q']")
     public WebElement searchText;
@@ -39,22 +41,20 @@ public class HomePage extends TestSetup {
 
 
     public void searchGoogle(String text) {
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name='q']")));
+        waitUntilElementLocated("//input[@name='q']", "Search text box");
         searchText.clear();
         searchText.sendKeys(text);
         searchText.sendKeys(Keys.ENTER);
     }
 
     public String getSearchResults() {
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='result-stats']")));
+        waitUntilElementLocated("//div[@id='result-stats']", "Search Result");
+        reportStep("Search Results Count", String.valueOf(searchResults.getText().trim().contains("results")), true);
         return searchResults.getText().trim();
     }
 
     public void hoverOnMobileMenu() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Handy']")));
+        waitUntilElementLocated("//a[@title='Handy']", "Mobile Menu");
         Actions action = new Actions(driver);
         action.moveToElement(mobileHeader).perform();
         Thread.sleep(2000);
@@ -64,6 +64,14 @@ public class HomePage extends TestSetup {
     public void acceptCookies() throws InterruptedException {
         Thread.sleep(5000);
         cookies.click();
+    }
+
+    public void waitUntilElementLocated(String locator, String locatorName) {
+        wait = new WebDriverWait(driver, timeout);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+        if (!driver.findElement(By.xpath(locator)).isDisplayed()) {
+            reportStep(locatorName + " locator is not present in webpage", "FAIL", true);
+        }
     }
 
 }

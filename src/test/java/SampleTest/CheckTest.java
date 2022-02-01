@@ -10,7 +10,7 @@ public class CheckTest extends TestSetup {
 
     @Test(dataProvider = "GenericDataProvider", dataProviderClass = TestDataReader.class, testName = "GoogleSearchCount")
     public void googleSearch(String text) throws InterruptedException {
-        homePage = new HomePage(driver);
+        homePage = new HomePage(driver, test);
         homePage.acceptCookies();
         homePage.hoverOnMobileMenu();
     }

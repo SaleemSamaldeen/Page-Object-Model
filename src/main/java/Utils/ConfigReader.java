@@ -14,6 +14,11 @@ public class ConfigReader {
     public static String apibaseURI;
     public static String testDataPath;
     public static String applicationURL;
+    public String category;
+    public String author;
+    public String testNodes;
+    public String testCaseName;
+    public String testDescription;
     public boolean propertyFlag = false;
 
     public ConfigReader() {

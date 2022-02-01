@@ -10,7 +10,7 @@ public class FirstTest extends TestSetup {
 
     @Test
     public void googleSearch() {
-        homePage = new HomePage(driver);
+        homePage = new HomePage(driver, test);
         System.out.println(driver);
         homePage.searchGoogle("Test Automation");
         System.out.println("I'm inside test-searchResultsCount " + homePage.getSearchResults());
@@ -19,7 +19,7 @@ public class FirstTest extends TestSetup {
 
     @Test
     public void searchResultsCount() {
-        homePage = new HomePage(driver);
+        homePage = new HomePage(driver, test);
         System.out.println(driver);
         homePage.searchGoogle("Performance testing");
         System.out.println("I'm inside test-searchResultsCount " + homePage.getSearchResults());

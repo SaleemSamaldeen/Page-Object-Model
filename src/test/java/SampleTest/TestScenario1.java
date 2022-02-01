@@ -11,7 +11,7 @@ public class TestScenario1 extends TestSetup {
 
     @Test(dataProvider = "GenericDataProvider", dataProviderClass = TestDataReader.class, testName = "GoogleSearchCount")
     public void googleSearch(String searchInput) {
-        homePage = new HomePage(driver);
+        homePage = new HomePage(driver, test);
         System.out.println(driver);
         homePage.searchGoogle(searchInput);
         System.out.println(homePage.getSearchResults());
